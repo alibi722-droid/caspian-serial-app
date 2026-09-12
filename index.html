@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>دفتر سریال کاسپین</title>
 
-<!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1db954">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -383,7 +382,6 @@ function buildCatRow() {
 
 function fieldRowHTML(f, idPrefix) {
   const id = idPrefix + '_' + f.key;
-  // فیلد سریال در فرم جدید: با دکمه 🔄
   if (f.key === 'serial' && idPrefix === 'new') {
     return `
       <label${f.required ? ' class="req"' : ''}>${f.label}</label>
