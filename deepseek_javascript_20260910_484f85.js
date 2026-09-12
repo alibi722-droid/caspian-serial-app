@@ -1,4 +1,4 @@
-const CACHE_NAME = 'caspian-serial-v1';
+const CACHE_NAME = 'caspian-serial-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -35,6 +35,17 @@ self.addEventListener('fetch', event => {
 
   if (url.indexOf('script.google.com') !== -1) {
     event.respondWith(fetch(event.request));
+    return;
+  }
+
+  if (event.request.destination === 'document' || url.endsWith('/index.html') || url.endsWith('/')) {
+    event.respondWith(
+      fetch(event.request).then(response => {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        return response;
+      }).catch(() => caches.match('./index.html'))
+    );
     return;
   }
 
